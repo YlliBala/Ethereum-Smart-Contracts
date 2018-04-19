@@ -1,5 +1,6 @@
 pragma solidity ^0.4.0; contract Inbox{
    
+   //Nje struktur me parametrat baze te messazhit
     struct msgData {
         address sender;
         address pranuesi;
@@ -9,9 +10,13 @@ pragma solidity ^0.4.0; contract Inbox{
         string imageURL;
         uint timeStamp;
     }
+    
+    //array per mesazhet
     mapping(uint => msgData) Mesazhet;
     
+    //Numrat identifikues dhe per kerkim te mesazheve qe po i perdorim.
     uint[] public numratEMesazhave;
+    
     
     function shkruajMesazhin(uint _numriMesazhit, address _derguesi, 
 address _pranuesi, string _subject, string _message, string _imageURL, 
@@ -25,11 +30,12 @@ address _bcc) public{
             msgData.bcc = _bcc;
             msgData.imageURL = _imageURL;
             msgData.timeStamp = now;
-            //'now' e merr timeStamp ipas Linux time;
+            //'now' e merr timeStamp sipas Linux time;
             
-            //'-1' vyn nese don me gjet vendodhjen e pushit ne array 
-mbasi array jon 0based duhet me ja zbrit 1 per vendodhjen
-            // e pushit
+            /*'-1' vyn nese don me gjet vendodhjen e push-it ne array 
+mbasi array jon 0-based duhet me ja zbrit 1 per vendodhjen
+            e pushit
+            */
             numratEMesazhave.push(_numriMesazhit) -1;
             
         }
@@ -37,7 +43,7 @@ mbasi array jon 0based duhet me ja zbrit 1 per vendodhjen
         /*kthen numrat e mesazhave qe jon gjeneru deri qetash, ka mujt 
 me kon edhe diqka tjeter p.sh. me kon Subjekti i mesazhit
         Ose per me kon unik mundet me kon Hashi i mesazhit qe e kerkon
-        Per arsye thjeshtesi e kom lon numer.
+        Per arsye thjeshtesie e kom lon numer.
         */
     function getNrMesazheve() view public returns(uint[]){
         return numratEMesazhave;
