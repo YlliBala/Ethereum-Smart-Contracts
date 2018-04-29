@@ -13,6 +13,11 @@ pragma solidity ^0.4.22; contract KickStarter{
         bool kaVotuar;
         
     }
+    
+    modifier onlyOwner{
+        require(msg.sender == owneri1);
+        _;
+    }
     //kan me u rujt kontribuesit per me pas casje ne votim
     mapping (address => kontribuesi) kontribuesit;
     //kan me u rujt votat e kontribuesve
@@ -51,8 +56,7 @@ kontribimet
       Kthen shumen ne Eth;
       Te drejta qasje ka vetem pronari i kontrates;
     */
-  function ShikoBalancinTotal() public view returns(uint){
-      require(owneri1==msg.sender);
+  function ShikoBalancinTotal() public onlyOwner view returns(uint){
       //E kthen bilancin wetem ne ether;
       return totaliMoney/1000000000000000000;
   }
@@ -74,8 +78,7 @@ numrat dhjetore;
   /*Funksioni qe shfaq perqindjen ne restin e thirrjes;
   Te drejta qasje ka vetem pronari i kontrates;
   */
-  function getPerqindjenPoz() public view returns(uint256){
-      require(owneri1==msg.sender);
+  function getPerqindjenPoz() public onlyOwner view returns(uint256){
       return kalkuloPerqindjen();
   }
   
