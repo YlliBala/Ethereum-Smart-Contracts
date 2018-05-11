@@ -65,17 +65,7 @@ returns(uint256){
     function transferoPare(address _to, uint256 _vlera) public {
          b.transfer(msg.sender,_to,_vlera);
     }
-    
-    function Approvo(address _spender,uint256 _vlera)public 
-returns(bool){
-        
-        return b.approve(_spender,_vlera);
-    }
-    
-    function allowance(address _owner, address _spender) public view 
-returns (uint256 remaining){
-        return b.allowance(_owner,_spender);
-    }
+   
 }
 contract AiBot{
     
