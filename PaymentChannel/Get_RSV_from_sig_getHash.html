@@ -1,0 +1,90 @@
+<html>
+<body>
+
+
+ <p>Vendose mesazhin e nenshkruar</p>
+ <input id="test01"> <br>
+
+ <p>Vendos tekstin per te gjetur hashin</p>
+ <input id="hashi"> <br>
+
+
+ <button type="button" onclick="ktheRSV()">KtheRSV!</button>
+
+ <button type="button" onclick="GenHash()">GenHash</button>
+
+
+
+ <p id="demo1"></p>
+
+ <p id="demo2"></p>
+
+ <p id="demo3"></p>
+
+ <p id="demo4"></p>
+
+ <p id="demo5"></p>
+
+      
+</body>
+
+<script src='Signature/forge-sha256-master/build/forge-sha256.min.js'></script>
+
+<script>
+    function ktheRSV(){
+
+        var msgStr = document.getElementById("test01").value;
+
+        //qekjo po punon mire
+       // document.getElementById("demo").innerHTML = msgStr +"str";
+
+       var r = "0x" + msgStr.slice(2,66);
+
+       document.getElementById("demo1").innerHTML = "R = " + r;
+
+       var  s = "0x" + msgStr.slice(66, 130);
+
+       document.getElementById("demo2").innerHTML = "S = " + s;
+
+       var  v = new ArrayBuffer(msgStr.slice(130, 132), "hex"); 
+
+       var vv = msgStr.slice(130, 132) ;
+
+       var hexV = hexStringToByte(vv);
+
+       document.getElementById("demo3").innerHTML = "V = " + vv;
+
+       document.getElementById("demo4").innerHTML = "V to bytes =  " + hexV;
+
+
+
+    }
+
+
+function hexStringToByte(str) {
+  if (!str) {
+    return new Uint8Array();
+  }
+  
+  var a = [];
+  for (var i = 0, len = str.length; i < len; i+=2) {
+    a.push(parseInt(str.substr(i,2),16));
+  }
+  
+  return new Uint8Array(a);
+}
+</script>
+
+
+<script>
+  function GenHash(){
+    
+    var plainTxt = document.getElementById("hashi").value;
+
+    document.getElementById("demo5").innerHTML ="SHA-256 per fjalen: '"+ plainTxt + "' eshte =>  0x" +  forge_sha256(plainTxt);
+  }
+
+</script>
+
+
+</html>
